@@ -46,9 +46,8 @@ const signupStudent = async (req, res) => {
 
 // get all teachers
 const getTeachers = async (req, res) => {
-  const user_id = req.user._id
 
-  const teachers = await Teacher.find({user_id}).sort({createdAt: -1})
+  const teachers = await Teacher.find().sort({createdAt: -1})
 
   res.status(200).json(teachers)
 }
@@ -97,6 +96,21 @@ const createLessonRequest = async (req, res) => {
       res.status(400).json({error: error.message})
     }
   }
+  const getSingleRequest = async (req, res) => {
+    const { id } = req.params
+  
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      return res.status(404).json({error: 'Ooops! Seems that this lesson request doesnt exist'})
+    }
+  
+    const lesson_request = await lessonRequest.findById(id)
+  
+    if (!lesson_request) {
+      return res.status(404).json({error: 'Ooops ! Seems this lesson request doesnt exist'})
+    }
+    
+    res.status(200).json(lesson_request)
+  }
 
 // Delete Lesson Request 
 const deleteLessonRequest = async (req, res) => {
@@ -136,7 +150,7 @@ const updateLessonRequest = async (req, res) => {
 
 
 
-module.exports = { signupStudent, loginStudent , getTeachers, getSingleTeacher, createLessonRequest, deleteLessonRequest, updateLessonRequest}
+module.exports = { signupStudent, loginStudent , getTeachers, getSingleTeacher, createLessonRequest, deleteLessonRequest, updateLessonRequest, getSingleRequest}
 
 
   
