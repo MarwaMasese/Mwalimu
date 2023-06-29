@@ -13,7 +13,7 @@ const router = express.Router()
 // require auth for all workout routes
 router.use(requireAuth)
 
-// GET all workouts
+// GET all teachers
 router.get('/', getWorkouts)
 
 //GET a single workout
