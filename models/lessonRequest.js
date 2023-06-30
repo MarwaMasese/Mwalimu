@@ -2,7 +2,7 @@ const mongoose = require('mongoose')
 
 const Schema = mongoose.Schema
 
-const lessonSchema = new Schema({
+const lessonRequestSchema = new Schema({
      teacher_id: {
         type: String,
         required: true
@@ -10,8 +10,12 @@ const lessonSchema = new Schema({
       student_id:{
         type: String,
         required: true,
-        unique: true
+      },
+      declined:{
+        type:Boolean,
+        default:false, 
+        required: true
       }
 }, { timestamps: true })
 
-module.exports = mongoose.model('Lesson', lessonSchema)
+module.exports = mongoose.model('LessonRequest', lessonRequestSchema)
