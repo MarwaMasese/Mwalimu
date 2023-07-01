@@ -159,4 +159,4 @@ const getSingleStudent = async (req, res) => {
 
 // }
 
-module.exports= {loginTeacher, signupTeacher, getSingleStudent, getLesson, getLessonRequests, getSingleRequest, getSingleStudent,get}
+module.exports= {loginTeacher, signupTeacher, getSingleStudent, getLesson, getLessonRequests, getSingleRequest, getSingleStudent,updateLessonRequest, declineLessonRequest}
