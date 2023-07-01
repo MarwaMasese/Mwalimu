@@ -1,32 +1,35 @@
 const express = require('express')
-const {
-  createWorkout,
-  getWorkouts,
-  getWorkout,
-  deleteWorkout,
-  updateWorkout
-} = require('../controllers/workoutController')
+const { signupStudent, loginStudent , getTeachers, getSingleTeacher, createLessonRequest, deleteLessonRequest, updateLessonRequest, getSingleRequest} = require('../controllers/studentController')
 const requireAuth = require('../middleware/requireAuth')
 
 const router = express.Router()
 
-// require auth for all workout routes
-router.use(requireAuth)
+// login route
+router.post('/loginStudent', loginStudent)
+
+// signup route
+router.post('/signupStudent', signupStudent)
+
+
 
 // GET all teachers
-router.get('/', getWorkouts)
+router.get('/studenthome',requireAuth, getTeachers)
 
-//GET a single workout
-router.get('/:id', getWorkout)
+// get single teacher
+router.get(':/id', getSingleTeacher)
 
-// POST a new workout
-router.post('/', createWorkout)
+// Create Lesson Request
+router.post('/createLessonRequest', createLessonRequest)
 
-// DELETE a workout
-router.delete('/:id', deleteWorkout)
+// Delete Lesson Request
+router.delete('/:id', deleteLessonRequest)
 
-// UPDATE a workout
-router.patch('/:id', updateWorkout)
+// update Lesson Request
+router.patch(':/id', updateLessonRequest)
+
+// get single lesson request
+router.get(':/id/lessonRequest', getSingleRequest)
+
 
 
 module.exports = router
