@@ -5,12 +5,7 @@ const validator = require('validator')
 const Schema = mongoose.Schema
 
 const teacherSchema = new Schema({
-  first_name:{
-    type: String,
-    required: true,
-    unique: true
-  },
-  surname:{
+  name:{
     type: String,
     required: true,
     unique: true
@@ -29,16 +24,20 @@ const teacherSchema = new Schema({
     type: String,
     required: true
   },
-  subjects:{
-    type: Array,
-    required: True
+  confirmed_password: {
+    type: String,
+    required: true
   },
+  // subjects:{
+  //   type: Array,
+  //   required: True
+  // },
   education_system: {
     type: String,
     required: true
   },
   rate:{
-    type: String,
+    type: Number,
     required: true
   },
   photo:{
@@ -49,11 +48,14 @@ const teacherSchema = new Schema({
 })
 
 // static signup method
-userSchema.statics.signup = async function(email, password) {
+teacherSchema.statics.signup = async function(name, phone,email,education_system, password, rate, confirmed_password) {
 
   // validation
-  if (!email || !password) {
+  if (!name || !phone || !email || ! education_system || !password ||!confirmed_password ||!rate) {
     throw Error('All fields must be filled')
+  }
+  if (password!=confirmed_password){
+    throw Error('Passwords must match')
   }
   if (!validator.isEmail(email)) {
     throw Error('Email not valid')
@@ -77,7 +79,7 @@ userSchema.statics.signup = async function(email, password) {
 }
 
 // static login method
-userSchema.statics.login = async function(email, password) {
+teacherSchema.statics.login = async function(email, password) {
 
   if (!email || !password) {
     throw Error('All fields must be filled')
