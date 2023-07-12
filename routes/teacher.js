@@ -1,13 +1,13 @@
 const express = require('express')
 
 // controller functions
-const {loginTeacher, signupTeacher, getSingleStudent, getLesson, getLessonRequests, getSingleRequest, getSingleStudent,updateLessonRequest, declineLessonRequest}= require('../controllers/teacherController')
-const requireAuth = require('../middleware/requireAuth')
+const {loginTeacher, signupTeacher, getSingleStudent, getLesson, getLessonRequests, getSingleRequest,updateLessonRequest, declineLessonRequest}= require('../controllers/teacherController')
+const teacherRequireAuth = require('../middleware/teacherRequireAuth')
 
 const router = express.Router()
 
-// require auth for all workout routes
-router.use(requireAuth)
+// require auth for all teacher routes
+// router.use(teacherRequireAuth)
 
 // login route
 router.post('/login', loginTeacher)

@@ -20,42 +20,35 @@ const teacherSchema = new Schema({
     required: true,
     unique: true
   },
+  educationsystem: {
+    type: String,
+    required: true
+  },
   password: {
     type: String,
     required: true
-  },
-  confirmed_password: {
-    type: String,
-    required: true
-  },
-  // subjects:{
-  //   type: Array,
-  //   required: True
-  // },
-  education_system: {
-    type: String,
-    required: true
-  },
+  }, 
   rate:{
     type: Number,
     required: true
   },
-  photo:{
-    type: String,
-    required: false
-  }
+  // photo:{
+  //   type: String,
+  //   required: false
+  // }
+  // subjects:{
+  //   type: Array,
+  //   required: True
+  // },
 
 })
 
-// static signup method
-teacherSchema.statics.signup = async function(name, phone,email,education_system, password, rate, confirmed_password) {
+// static signup method (Done and Tested)
+teacherSchema.statics.signup = async function(name, phone,email,educationsystem, password, rate) {
 
   // validation
-  if (!name || !phone || !email || ! education_system || !password ||!confirmed_password ||!rate) {
+  if (!name || !phone || !email || !educationsystem || !password ||!rate) {
     throw Error('All fields must be filled')
-  }
-  if (password!=confirmed_password){
-    throw Error('Passwords must match')
   }
   if (!validator.isEmail(email)) {
     throw Error('Email not valid')
@@ -73,7 +66,7 @@ teacherSchema.statics.signup = async function(name, phone,email,education_system
   const salt = await bcrypt.genSalt(10)
   const hash = await bcrypt.hash(password, salt)
 
-  const user = await this.create({ email, password: hash })
+  const user = await this.create({name, phone,email,educationsystem, password: hash ,rate })
 
   return user
 }

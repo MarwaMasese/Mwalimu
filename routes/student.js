@@ -1,6 +1,6 @@
 const express = require('express')
 const { signupStudent, loginStudent , getTeachers, getSingleTeacher, createLessonRequest, deleteLessonRequest, updateLessonRequest, getSingleRequest} = require('../controllers/studentController')
-const requireAuth = require('../middleware/requireAuth')
+const requireAuth = require('../middleware/studentRequireAuth')
 
 const router = express.Router()
 

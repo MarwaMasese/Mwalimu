@@ -31,10 +31,10 @@ const loginTeacher = async (req, res) => {
 
 // signup a teacher
 const signupTeacher = async (req, res) => {
-  const {name, phone,email,education_system, password, rate, confirmed_password} = req.body
+  const {name, phone,email,educationsystem, password, rate} = req.body
 
   try {
-    const user = await Teacher.signup(name, phone,email,education_system, password, rate, confirmed_password)
+    const user = await Teacher.signup(name, phone,email,educationsystem, password, rate)
 
     // create a token
     const token = createToken(user._id)
